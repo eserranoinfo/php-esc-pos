@@ -96,6 +96,19 @@ class Printer
         return $this->send(EscPos::CTL_ESC . "!" . chr($mode));
     }
 
+     /**
+     * Set the size of text, as a multiple of the normal size.
+     *
+     * @param int $widthMultiplier Multiple of the regular height to use (range 1 - 8)
+     * @param int $heightMultiplier Multiple of the regular height to use (range 1 - 8)
+     */
+    public function setTextSize($widthMultiplier, $heightMultiplier)
+    {
+    	$c = pow(2, 4) * ($widthMultiplier - 1) + ($heightMultiplier - 1);
+    	$this->device-> write(EscPos::CTL_GS . "!" . chr($c));
+    }
+    
+    
     /**
      * Turn underline mode on/off
      *
